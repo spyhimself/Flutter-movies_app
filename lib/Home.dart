@@ -19,7 +19,9 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).pushNamed("addMovie");
+        },
         child: Icon(Icons.add),
       ),
       appBar: AppBar(title: Text("Home"),),
