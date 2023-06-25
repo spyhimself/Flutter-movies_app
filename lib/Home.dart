@@ -57,7 +57,26 @@ class _HomeState extends State<Home> {
                                               duration: listFilms[idx]['duration'],))
                                         );
                                       }, child: Icon(Icons.edit, color: Colors.green, size: 25,)),
-                                      TextButton(onPressed: () {}, child: Icon(Icons.delete, color: Colors.red, size: 25,)),
+                                      TextButton(onPressed: () {
+                                        showDialog(context: context,
+                                            builder: (context) => AlertDialog(
+                                              title: Text("Are you sure you wanna delete ${listFilms[idx]['title']}?"),
+                                              actions: [
+                                                ElevatedButton(onPressed: () async {
+                                                  int rep = await sqldb
+                                                      .deleteData("DELETE FROM 'movies' WHERE id = ${listFilms[idx]['id']}");
+                                                  if(rep > 0) {
+                                                    Navigator.of(context).pop();
+                                                    setState(() {
+                                                    });
+                                                  }
+                                                }, child: Text("Yes")),
+                                                ElevatedButton(onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                }, child: Text("Cancel")),
+                                              ],
+                                            ));
+                                      }, child: Icon(Icons.delete, color: Colors.red, size: 25,)),
                                     ],
                                   ),
                                 ),
