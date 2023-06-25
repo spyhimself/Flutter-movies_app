@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:movies_app/Sqldb.dart';
+import 'package:movies_app/UpdateMovie.dart';
 
 class Home extends StatefulWidget {
   const Home({super.key});
@@ -48,7 +49,14 @@ class _HomeState extends State<Home> {
                                   trailing: Row(
                                     mainAxisSize: MainAxisSize.min,
                                     children: [
-                                      TextButton(onPressed: () {}, child: Icon(Icons.edit, color: Colors.green, size: 25,)),
+                                      TextButton(onPressed: () {
+                                        Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) => UpdateMovie(id: listFilms[idx]['id'],
+                                              title: listFilms[idx]['title'],
+                                              duration: listFilms[idx]['duration'],))
+                                        );
+                                      }, child: Icon(Icons.edit, color: Colors.green, size: 25,)),
                                       TextButton(onPressed: () {}, child: Icon(Icons.delete, color: Colors.red, size: 25,)),
                                     ],
                                   ),
